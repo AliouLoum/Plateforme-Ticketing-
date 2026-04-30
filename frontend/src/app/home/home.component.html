@@ -1,0 +1,208 @@
+<div class="home-container">
+  <!-- Section Héros : Solide, Impactant, Coloré -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="badge-solid" data-aos="fade-down">🚀 L'Événementiel, Réinventé</div>
+      <h1 data-aos="fade-up">Vivez l'instant, <br><span class="text-highlight">SeneTicket</span> s'occupe du reste.</h1>
+      <p data-aos="fade-up" data-aos-delay="100">Plus de 500 événements au Sénégal à portée de main.</p>
+      
+      <!-- Barre de recherche solide -->
+      <div class="solid-search-bar" data-aos="zoom-in" data-aos-delay="200">
+        <div class="search-field">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" placeholder="Rechercher un événement...">
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-field">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <select>
+            <option value="">Où ?</option>
+            <option value="dakar">Dakar</option>
+            <option value="saly">Saly</option>
+            <option value="saint-louis">Saint-Louis</option>
+          </select>
+        </div>
+        <button class="btn-solid-primary">Rechercher</button>
+      </div>
+    </div>
+    <div class="hero-image" data-aos="fade-left">
+      <img src="images/hero-image.png" alt="Concert vibrant">
+    </div>
+  </section>
+
+  <!-- Statistiques (Preuve sociale) -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-card" *ngFor="let stat of statistiques; let i = index" data-aos="fade-up" [attr.data-aos-delay]="i * 100">
+        <h3>{{ stat.valeur }}</h3>
+        <p>{{ stat.label }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agenda Rapide (Liste vivante) -->
+  <section class="agenda-section">
+    <div class="section-header" data-aos="fade-right">
+      <h2>Prochainement à Dakar</h2>
+      <a href="#" class="btn-solid-secondary">Voir tout l'agenda</a>
+    </div>
+    
+    <div class="agenda-list">
+      <div class="agenda-item" *ngFor="let event of prochainsEvenements; let i = index" data-aos="fade-up" [attr.data-aos-delay]="i * 100">
+        <div class="agenda-date">
+          <span class="day">{{ event.jour }}</span>
+          <span class="month">{{ event.mois }}</span>
+        </div>
+        <div class="agenda-img">
+          <img [src]="event.image" alt="Event image">
+        </div>
+        <div class="agenda-details">
+          <h4>{{ event.titre }}</h4>
+          <p>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            {{ event.heure }} &bull; 
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            {{ event.lieu }}
+          </p>
+        </div>
+        <div class="agenda-action">
+          <button class="btn-solid-primary small">Billets</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catégories Solides -->
+  <section class="categories-section">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2>Explorez par Passions</h2>
+    </div>
+    
+    <div class="categories-grid">
+      <div class="solid-category-card" *ngFor="let cat of categories; let i = index" data-aos="zoom-in" [attr.data-aos-delay]="i * 100" [style.borderBottomColor]="cat.couleurIcone">
+        <div class="icon-circle" [style.backgroundColor]="cat.couleurFond" [style.color]="cat.couleurIcone">
+          <ng-container [ngSwitch]="cat.nom">
+            <svg *ngSwitchCase="'Musique'" viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+            <svg *ngSwitchCase="'Arts'" viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="5.5" r="1.5"></circle><circle cx="17.5" cy="10.5" r="1.5"></circle><circle cx="8.5" cy="7.5" r="1.5"></circle><circle cx="6.5" cy="12.5" r="1.5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg>
+            <svg *ngSwitchCase="'Sports'" viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
+            <svg *ngSwitchCase="'Festivals'" viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2" ry="2"></rect><line x1="3" y1="12" x2="21" y2="12"></line><line x1="8" y1="8" x2="8" y2="20"></line></svg>
+          </ng-container>
+        </div>
+        <span class="cat-name">{{ cat.nom }}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Événements à la Une (Grille Premium Classique) -->
+  <section class="featured-section">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2>Les Incontournables</h2>
+      <p>Ne manquez pas les événements les plus populaires du moment.</p>
+    </div>
+
+    <div class="solid-events-grid">
+      <div class="solid-event-card" *ngFor="let evenement of evenementsAlaUne; let i = index" data-aos="fade-up" [attr.data-aos-delay]="i * 100">
+        <div class="card-img-wrapper">
+          <img [src]="evenement.image" alt="Event Image">
+          <span class="solid-badge">{{ evenement.categorie }}</span>
+        </div>
+        <div class="card-content">
+          <div class="date-strip">
+            <span class="day">{{ evenement.date.split(' ')[0] }}</span>
+            <span class="month">{{ evenement.date.split(' ')[1] }}</span>
+          </div>
+          <h3>{{ evenement.titre }}</h3>
+          <p class="location">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            {{ evenement.lieu }}
+          </p>
+          <div class="card-footer">
+            <span class="price" *ngIf="evenement.prix">{{ evenement.prix }}</span>
+            <button class="btn-solid-primary" [class.small]="!evenement.prix">
+              {{ evenement.prix ? 'Acheter' : 'Détails' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comment ça marche (Étapes simples, Dark Mode Contrasté) -->
+  <section class="how-it-works-section">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2>Comment ça marche ?</h2>
+      <p>Votre prochain événement en 3 étapes simples.</p>
+    </div>
+
+    <div class="steps-container">
+      <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="step-number">1</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+        <h3>Trouvez un événement</h3>
+        <p>Explorez notre catalogue et trouvez l'événement qui vous fait vibrer à Dakar et partout au Sénégal.</p>
+      </div>
+
+      <div class="step-connector"></div>
+
+      <div class="step-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="step-number">2</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        </div>
+        <h3>Réservez en 1 clic</h3>
+        <p>Payez en toute sécurité via Mobile Money (Orange Money, Wave) ou par carte bancaire.</p>
+      </div>
+
+      <div class="step-connector"></div>
+
+      <div class="step-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="step-number">3</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <h3>Profitez du moment</h3>
+        <p>Recevez votre e-billet avec QR code immédiatement. Présentez-le à l'entrée et amusez-vous !</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pourquoi Choisir (Cartes avec icônes colorées) -->
+  <section class="features-section">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2>L'Expérience SeneTicket</h2>
+    </div>
+    
+    <div class="features-grid">
+      <div class="solid-feature-card" *ngFor="let avantage of avantages; let i = index" data-aos="slide-up" [attr.data-aos-delay]="i * 150">
+        <div class="feature-icon-wrapper">
+          <ng-container [ngSwitch]="i">
+            <svg *ngSwitchCase="0" viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <svg *ngSwitchCase="1" viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+            <svg *ngSwitchCase="2" viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </ng-container>
+        </div>
+        <h3>{{ avantage.titre }}</h3>
+        <p>{{ avantage.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section: Bandeau coloré ultra-vivant -->
+  <section class="cta-section">
+    <div class="cta-banner" data-aos="zoom-in">
+      <div class="cta-content">
+        <h2>Prêt à lancer votre prochain événement ?</h2>
+        <p>Rejoignez les organisateurs qui font confiance à SeneTicket pour booster leurs ventes et offrir la meilleure expérience.</p>
+        <div class="cta-buttons">
+          <button class="btn-solid-primary">Créer un événement</button>
+          <a href="#" class="btn-solid-secondary">Contacter le support</a>
+        </div>
+      </div>
+      <div class="cta-illustration">
+        <img src="images/cta-illustration.png" alt="Créer un événement" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+    </div>
+  </section>
+</div>

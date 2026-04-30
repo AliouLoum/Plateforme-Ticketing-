@@ -1,0 +1,61 @@
+<div class="venues-container">
+  <!-- Hero Venues Section -->
+  <section class="venues-hero">
+    <div class="hero-content">
+      <div class="badge-solid" data-aos="fade-down">📍 Espaces d'exception</div>
+      <h1 data-aos="fade-up">Les meilleurs <span class="text-highlight">Lieux</span> pour vos événements.</h1>
+      <p data-aos="fade-up" data-aos-delay="100">Des théâtres intimes aux grands stades, découvrez les espaces qui feront de votre prochain événement un succès mémorable.</p>
+    </div>
+  </section>
+
+  <!-- Venues Grid Section -->
+  <section class="venues-list-section">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2>Explorez nos Lieux Partenaires</h2>
+      <p>Trouvez le cadre idéal, quelle que soit la taille ou la nature de votre événement.</p>
+    </div>
+
+    <div class="venues-grid">
+      <div class="venue-card" *ngFor="let lieu of lieux; let i = index" data-aos="fade-up" [attr.data-aos-delay]="i * 100">
+        <div class="venue-img-wrapper">
+          <!-- Image -->
+          <img [src]="lieu.image" [alt]="lieu.nom" class="venue-image">
+          <div class="venue-tags">
+            <span class="tag" *ngFor="let tag of lieu.tags">{{ tag }}</span>
+          </div>
+        </div>
+        <div class="venue-content">
+          <h3>{{ lieu.nom }}</h3>
+          <div class="venue-meta">
+            <p class="location">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              {{ lieu.lieu }}
+            </p>
+            <p class="capacity">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              {{ lieu.capacite }}
+            </p>
+          </div>
+          <p class="description">{{ lieu.description }}</p>
+          <div class="venue-footer">
+            <button class="btn-solid-secondary w-full">Voir les événements associés</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Organizers -->
+  <section class="cta-section">
+    <div class="cta-banner" data-aos="zoom-in">
+      <div class="cta-content">
+        <h2>Vous gérez un lieu d'événement ?</h2>
+        <p>Devenez partenaire SeneTicket, référencez votre espace et attirez plus d'organisateurs prestigieux.</p>
+        <div class="cta-buttons">
+          <button class="btn-solid-primary">Référencer mon lieu</button>
+          <a href="#" class="btn-solid-secondary">En savoir plus</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

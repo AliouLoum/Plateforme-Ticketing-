@@ -1,0 +1,287 @@
+.venues-container {
+  font-family: var(--font-body);
+  color: #111827;
+  overflow-x: hidden;
+  background-color: #FAFAFA;
+}
+
+/* === UTILS === */
+.text-center { text-align: center; }
+.w-full { width: 100%; }
+
+.section-header {
+  margin-bottom: 56px;
+  h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #111827;
+    margin-bottom: 16px;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+  }
+  p {
+    font-size: 1.2rem;
+    color: #4B5563;
+    font-weight: 500;
+  }
+}
+
+/* === BUTTONS === */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  &:active { transform: scale(0.96); }
+  &:focus-visible { outline: 2px solid #FFC107; outline-offset: 2px; }
+}
+
+.btn-solid-primary {
+  background: #FFC107;
+  color: #111827;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 4px 6px rgba(255, 193, 7, 0.2);
+  &:hover { background: #F5B041; transform: translateY(-2px); box-shadow: 0 8px 12px rgba(255, 193, 7, 0.3); }
+}
+
+.btn-solid-secondary {
+  background: white;
+  color: #111827;
+  border: 2px solid #E5E7EB;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  display: inline-block;
+  &:hover { border-color: #111827; background: #F9FAFB; }
+}
+
+.btn-solid-secondary-dark {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  &:hover { border-color: white; background: rgba(255, 255, 255, 0.05); }
+}
+
+/* === HERO SECTION === */
+.venues-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 50vh;
+  padding: 80px 5%;
+  background-color: #000000;
+  color: white;
+  overflow: hidden;
+
+  /* Rich Background Design */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      radial-gradient(circle at 50% 100%, rgba(0, 0, 0, 0.7), #000000);
+    background-size: 60px 60px, 60px 60px, cover;
+    background-position: center top, center top, center;
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+
+    .badge-solid {
+      background: #FFC107;
+      color: #111827;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: inline-block;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 10px rgba(255, 193, 7, 0.4);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      .text-highlight { color: #FFC107; }
+    }
+
+    p {
+      font-size: 1.25rem;
+      color: #9CA3AF;
+    }
+  }
+}
+
+/* === VENUES LIST SECTION === */
+.venues-list-section {
+  padding: 80px 5%;
+  background: #FAFAFA;
+
+  .venues-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .venue-card {
+      background: white;
+      border-radius: 24px;
+      border: 1px solid #E5E7EB;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
+        
+        .venue-image {
+          transform: scale(1.05);
+        }
+      }
+
+      .venue-img-wrapper {
+        position: relative;
+        height: 220px;
+        overflow: hidden;
+
+        .venue-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .venue-tags {
+          position: absolute;
+          top: 16px;
+          left: 16px;
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+
+          .tag {
+            background: rgba(255, 255, 255, 0.9);
+            color: #111827;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            backdrop-filter: blur(4px);
+          }
+        }
+      }
+
+      .venue-content {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
+        h3 {
+          font-size: 1.5rem;
+          font-weight: 900;
+          color: #111827;
+          margin-bottom: 16px;
+        }
+
+        .venue-meta {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin-bottom: 16px;
+
+          p {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #4B5563;
+            font-weight: 600;
+            font-size: 0.95rem;
+
+            svg { color: #FFC107; }
+          }
+        }
+
+        .description {
+          color: #6B7280;
+          line-height: 1.6;
+          margin-bottom: 24px;
+          flex: 1;
+        }
+
+        .venue-footer {
+          margin-top: auto;
+        }
+      }
+    }
+  }
+}
+
+/* === CTA SECTION === */
+.cta-section {
+  padding: 80px 5%;
+  background: #FAFAFA;
+
+  .cta-banner {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 32px;
+    padding: 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.05);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,193,7,0.1) 0%, rgba(255,255,255,0) 50%);
+      pointer-events: none;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      margin: 0 auto;
+
+      h2 { font-size: 2.5rem; font-weight: 900; color: #111827; margin-bottom: 16px; }
+      p { font-size: 1.2rem; color: #4B5563; margin-bottom: 40px; }
+
+      .cta-buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        @media (max-width: 600px) { flex-direction: column; }
+      }
+    }
+  }
+}

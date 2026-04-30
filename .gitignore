@@ -1,0 +1,13 @@
+# Directories
+DESIGN/
+Images/
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/coverage/
+
+# Files
+plateforme_ticketing_senegal.pdf
+.prettierrc
+*.log
+.env
