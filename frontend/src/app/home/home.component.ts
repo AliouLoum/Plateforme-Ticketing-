@@ -1,5 +1,5 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import AOS from 'aos';
 
 @Component({
@@ -10,15 +10,24 @@ import AOS from 'aos';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
   // Initialisation des animations au défilement (quand on scroll)
   ngOnInit() {
-    AOS.init({
-      duration: 800,
-      easing: 'ease-out-cubic',
-      once: true,
-      offset: 100
-    });
+    if (isPlatformBrowser(this.platformId)) {
+      AOS.init({
+        duration: 400,
+        easing: 'ease-out-cubic',
+        once: true,
+        offset: 50
+      });
+      this.startAutoPlay();
+    }
+  }
+
+  ngOnDestroy() {
+    this.stopAutoPlay();
   }
 
   // Liste des catégories d'événements à afficher
@@ -29,6 +38,15 @@ export class HomeComponent implements OnInit {
     { nom: 'Festivals', couleurFond: '#FBE9E7', couleurIcone: '#FF3D00' }
   ];
 
+  // NOUVEAU : Destinations phares (Inspiré d'Eventbrite)
+  topDestinations = [
+    { nom: 'Dakar', image: 'images/Dakar.jpg', nbEvenements: 45 },
+    { nom: 'Saly', image: 'images/vue-aerienne-jumbo-le-saly_849041_panohd.avif', nbEvenements: 12 },
+    { nom: 'Saint-Louis', image: 'images/Saint_louis.jpg', nbEvenements: 8 },
+    { nom: 'Cap Skirring', image: 'images/cap_skirring.jpg', nbEvenements: 5 },
+    { nom: 'Touba', image: 'images/touba.jpg', nbEvenements: 3 }
+  ];
+
   // Les événements mis en avant sur la page d'accueil
   evenementsAlaUne = [
     {
@@ -37,7 +55,7 @@ export class HomeComponent implements OnInit {
       date: '15 OCT',
       lieu: 'Monument de la Renaissance, Dakar',
       prix: '5 000 XOF',
-      image: 'images/event-music.jpeg',
+      image: 'images/monument_de_la_renaissance.jpg',
       misEnAvant: true
     },
     {
@@ -45,15 +63,15 @@ export class HomeComponent implements OnInit {
       categorie: 'ARTS',
       date: '02 Nov',
       lieu: 'Musée des Civilisations Noires',
-      image: 'images/event-art.jpeg',
+      image: 'images/musee_civil_noir.jpg',
       misEnAvant: false
     },
     {
       titre: 'Championnat de Lutte Sénégalaise',
       categorie: 'SPORTS',
       date: '10 Déc',
-      lieu: 'Stade Demba Diop',
-      image: 'images/event-sport.jpeg',
+      lieu: 'Stade Abdoulaye Wade',
+      image: 'images/stade_abdoulaye_wade.jpg',
       misEnAvant: false
     }
   ];
@@ -62,15 +80,18 @@ export class HomeComponent implements OnInit {
   avantages = [
     { 
       titre: 'Paiements Sécurisés', 
-      description: 'Vos transactions sont protégées avec les standards de sécurité les plus élevés via Mobile Money (Orange Money, Wave) et Cartes Bancaires.' 
+      description: 'Vos transactions sont protégées avec les standards de sécurité les plus élevés via Mobile Money (Orange Money, Wave) et Cartes Bancaires.',
+      image: 'images/mobile-home.png'
     },
     { 
       titre: 'Outils Organisateurs', 
-      description: 'Gérez vos ventes, suivez vos statistiques en temps réel et analysez votre audience avec notre tableau de bord intuitif.' 
+      description: 'Gérez vos ventes, suivez vos statistiques en temps réel et analysez votre audience avec notre tableau de bord intuitif.',
+      image: 'images/mobile-events.png'
     },
     { 
       titre: 'Check-in Simplifié', 
-      description: 'Oubliez le papier. Scannez directement les QR codes à l\'entrée avec notre application dédiée pour un accès rapide.' 
+      description: 'Oubliez le papier. Scannez directement les QR codes à l\'entrée avec notre application dédiée pour un accès rapide.',
+      image: 'images/mobile-categories.png'
     }
   ];
 
@@ -96,4 +117,26 @@ export class HomeComponent implements OnInit {
     { jour: '01', mois: 'NOV', titre: 'Marathon Eiffage', lieu: 'Corniche Ouest', heure: '07:00', image: 'images/event-sport.jpeg' },
     { jour: '12', mois: 'NOV', titre: 'Startup Weekend Dakar', lieu: 'Place du Souvenir', heure: '09:00', image: 'images/agenda-speaker.png' }
   ];
+
+  // Gestion de l'accordéon pour la section App Showcase
+  activeFeatureIndex: number = 0;
+  private autoPlayInterval: any;
+
+  startAutoPlay() {
+    this.autoPlayInterval = setInterval(() => {
+      this.activeFeatureIndex = (this.activeFeatureIndex + 1) % this.avantages.length;
+    }, 4000); // Change toutes les 4 secondes
+  }
+
+  stopAutoPlay() {
+    if (this.autoPlayInterval) {
+      clearInterval(this.autoPlayInterval);
+    }
+  }
+
+  toggleFeature(index: number) {
+    this.activeFeatureIndex = index;
+    this.stopAutoPlay();
+    this.startAutoPlay(); // Redémarre le timer après l'interaction
+  }
 }

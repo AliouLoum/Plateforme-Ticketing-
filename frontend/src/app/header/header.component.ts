@@ -17,7 +17,7 @@ import { RouterModule } from '@angular/router';
       <nav class="nav-links">
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Explorer</a>
         <a routerLink="/lieux" routerLinkActive="active">Lieux</a>
-        <a href="#">Catégories</a>
+        <a routerLink="/categories" routerLinkActive="active">Catégories</a>
       </nav>
       
       <!-- Boutons d'action à droite -->

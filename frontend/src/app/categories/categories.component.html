@@ -1,0 +1,129 @@
+<div class="categories-container">
+  <!-- Hero Section -->
+  <section class="categories-hero">
+    <div class="hero-content">
+      <div class="badge-solid" data-aos="fade-down">✨ Découvrez vos passions</div>
+      <h1 data-aos="fade-up">Trouvez l'événement qui vous <span class="text-highlight">ressemble</span>.</h1>
+      <p data-aos="fade-up" data-aos-delay="100">Parcourez nos différentes catégories et plongez au cœur de ce qui vous anime.</p>
+    </div>
+  </section>
+
+  <!-- Section Tendance (Trending) -->
+  <section class="trending-section" data-aos="fade-up" *ngIf="categorieTendance">
+    <div class="trending-card">
+      <div class="trending-bg" [style.backgroundImage]="'url(' + categorieTendance.image + ')'"></div>
+      <div class="trending-overlay"></div>
+      <div class="trending-content">
+        <div class="trending-badge">🔥 Tendance de la Semaine</div>
+        <h2>{{ categorieTendance.nom }}</h2>
+        <p>{{ categorieTendance.description }}</p>
+        <button class="btn-solid-primary mt-3">Voir les {{ categorieTendance.evenements }} événements</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filters & Search Section -->
+  <section class="filters-section" data-aos="fade-up">
+    <div class="search-container">
+      <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher une catégorie..." class="search-input">
+    </div>
+
+    <!-- Ambiance Filters -->
+    <div class="ambiance-filters">
+      <button 
+        *ngFor="let amb of ambiances" 
+        class="filter-chip" 
+        [class.active]="selectedAmbiance === amb"
+        (click)="selectAmbiance(amb)">
+        {{ amb }}
+      </button>
+    </div>
+  </section>
+
+  <!-- Categories Grid Section -->
+  <section class="categories-list-section">
+    <div class="categories-grid">
+      <div class="category-card" *ngFor="let cat of filteredCategories; let i = index" data-aos="zoom-in" [attr.data-aos-delay]="(i % 3) * 100">
+        
+        <!-- Background Image -->
+        <div class="category-bg" [style.backgroundImage]="'url(' + cat.image + ')'"></div>
+        <div class="category-overlay"></div>
+
+        <div class="category-content">
+          <div class="category-header">
+            <!-- Dynamic SVG Icon based on ID -->
+            <div class="category-icon">
+              <svg *ngIf="cat.id === 'musique'" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+              <svg *ngIf="cat.id === 'arts'" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+              <svg *ngIf="cat.id === 'sports'" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="21.17" y1="8" x2="12" y2="8"></line><line x1="3.95" y1="6.06" x2="8.54" y2="14"></line><line x1="10.88" y1="21.94" x2="15.46" y2="14"></line></svg>
+              <svg *ngIf="cat.id === 'festivals'" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 22h20L12 2z"></path><path d="M12 2v20"></path></svg>
+              <svg *ngIf="cat.id === 'theatre'" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+              <svg *ngIf="cat.id === 'tech'" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            </div>
+            <div class="events-count">{{ cat.evenements }} événement(s)</div>
+          </div>
+          
+          <div class="category-info">
+            <h2>{{ cat.nom }}</h2>
+            <p class="description">{{ cat.description }}</p>
+            
+            <!-- Sous Catégories Tags -->
+            <div class="sub-categories">
+              <span class="sub-tag" *ngFor="let sub of cat.sousCategories | slice:0:3">{{ sub }}</span>
+              <span class="sub-tag" *ngIf="cat.sousCategories.length > 3">+{{ cat.sousCategories.length - 3 }}</span>
+            </div>
+
+            <button class="btn-explore">
+              Explorer
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" style="margin-left: 8px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="empty-state" *ngIf="filteredCategories.length === 0">
+      <p>Aucune catégorie ne correspond à votre recherche.</p>
+      <button class="btn-solid-primary" (click)="searchTerm=''; selectedAmbiance='Toutes'">Réinitialiser les filtres</button>
+    </div>
+  </section>
+
+  <!-- Événements à la Une (Preview) -->
+  <section class="featured-events-section" data-aos="fade-up">
+    <div class="section-header">
+      <h2>🔥 Événements à la une</h2>
+      <a href="#" class="view-all">Voir tout l'agenda</a>
+    </div>
+    <div class="events-grid">
+      <div class="event-card" *ngFor="let ev of evenementsPhare" data-aos="fade-up">
+        <div class="event-image" [style.backgroundImage]="'url(' + ev.image + ')'">
+          <div class="event-category-badge">{{ ev.categorie }}</div>
+        </div>
+        <div class="event-details">
+          <div class="event-date">
+            <span class="date-text">{{ ev.date }}</span>
+          </div>
+          <h3>{{ ev.titre }}</h3>
+          <p class="event-location">📍 {{ ev.lieu }}</p>
+          <div class="event-footer">
+            <span class="event-price">{{ ev.prix }}</span>
+            <button class="btn-book">Réserver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section" data-aos="zoom-in">
+    <div class="newsletter-content">
+      <h2>Ne manquez aucun événement !</h2>
+      <p>Inscrivez-vous à notre newsletter pour recevoir en avant-première les alertes sur vos catégories préférées.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Votre adresse email...">
+        <button class="btn-solid-dark">S'inscrire</button>
+      </div>
+    </div>
+  </section>
+</div>
