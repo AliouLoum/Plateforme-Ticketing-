@@ -60,6 +60,9 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "allowedHosts": [".pinggy-free.link", ".loca.lt", "all"]
+          },
           "configurations": {
             "production": {
               "buildTarget": "frontend:build:production"

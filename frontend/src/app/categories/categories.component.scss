@@ -6,7 +6,7 @@
 }
 
 /* === UTILS === */
-.text-highlight { color: #FFC107; }
+.text-highlight { color: #FFD700; }
 .mt-3 { margin-top: 1rem; }
 
 /* === HERO SECTION === */
@@ -40,7 +40,7 @@
     max-width: 800px;
 
     .badge-solid {
-      background: #FFC107;
+      background: #FFD700;
       color: #111827;
       padding: 8px 16px;
       border-radius: 999px;
@@ -54,6 +54,7 @@
     }
 
     h1 {
+      color: #FFFFFF !important;
       font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 900;
       line-height: 1.1;
@@ -111,7 +112,7 @@
       .trending-badge {
         display: inline-block;
         background: rgba(255, 193, 7, 0.2);
-        color: #FFC107;
+        color: #FFD700;
         padding: 4px 12px;
         border-radius: 99px;
         font-weight: 700;
@@ -124,6 +125,7 @@
         font-size: 2.5rem;
         font-weight: 900;
         margin-bottom: 8px;
+        color: #FFFFFF !important;
       }
 
       p {
@@ -132,7 +134,7 @@
       }
 
       .btn-solid-primary {
-        background: #FFC107;
+        background: #FFD700;
         color: #111827;
         border: none;
         padding: 12px 24px;
@@ -177,7 +179,7 @@
       
       &:focus {
         outline: none;
-        border-color: #FFC107;
+        border-color: #FFD700;
         box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.1);
       }
     }
@@ -200,13 +202,13 @@
       transition: all 0.2s;
 
       &:hover {
-        border-color: #FFC107;
+        border-color: #FFD700;
         color: #111827;
       }
 
       &.active {
-        background: #FFC107;
-        border-color: #FFC107;
+        background: #FFD700;
+        border-color: #FFD700;
         color: #111827;
         box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
       }
@@ -242,7 +244,7 @@
           background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.1) 100%);
         }
         .btn-explore {
-          background: #FFC107;
+          background: #FFD700;
           color: #111827;
           transform: translateY(0);
           opacity: 1;
@@ -289,7 +291,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #FFC107;
+            color: #FFD700;
           }
 
           .events-count {
@@ -326,7 +328,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
 
             .sub-tag {
               background: rgba(255, 255, 255, 0.15);
@@ -336,6 +338,44 @@
               font-size: 0.75rem;
               font-weight: 600;
               border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+          }
+
+          .popularity-bar {
+            margin-bottom: 16px;
+
+            .popularity-labels {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 6px;
+
+              .popularity-label {
+                font-size: 0.65rem;
+                font-weight: 700;
+                color: rgba(255, 255, 255, 0.5);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+              }
+
+              .popularity-value {
+                font-size: 0.65rem;
+                font-weight: 800;
+                color: #FFD700;
+              }
+            }
+
+            .popularity-track {
+              background: rgba(255, 255, 255, 0.1);
+              border-radius: 99px;
+              height: 6px;
+              overflow: hidden;
+
+              .popularity-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #FFD700, #FFA500);
+                border-radius: 99px;
+                transition: width 1s ease-out;
+              }
             }
           }
 
@@ -371,7 +411,7 @@
     }
 
     .btn-solid-primary {
-      background: #FFC107;
+      background: #FFD700;
       color: #111827;
       border: none;
       padding: 12px 24px;
@@ -401,7 +441,7 @@
     }
 
     .view-all {
-      color: #FFC107;
+      color: #FFD700;
       font-weight: 700;
       text-decoration: none;
       &:hover { text-decoration: underline; }
@@ -451,7 +491,7 @@
         padding: 24px;
 
         .event-date {
-          color: #FFC107;
+          color: #FFD700;
           font-weight: 800;
           font-size: 0.9rem;
           margin-bottom: 8px;
@@ -492,7 +532,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s;
-            &:hover { background: #FFC107; color: #111827; }
+            &:hover { background: #FFD700; color: #111827; }
           }
         }
       }
@@ -503,7 +543,7 @@
 /* === NEWSLETTER SECTION === */
 .newsletter-section {
   padding: 80px 5%;
-  background: #FFC107;
+  background: #FFD700;
   color: #111827;
   text-align: center;
 

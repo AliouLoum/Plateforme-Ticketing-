@@ -2,188 +2,242 @@
   <!-- Section Héros : Solide, Impactant, Coloré -->
   <section class="hero-section">
     <div class="hero-content">
-      <div class="badge-solid" data-aos="fade-down">🚀 L'Événementiel, Réinventé</div>
-      <h1 data-aos="fade-up">Vivez l'instant, <br><span class="text-highlight">SeneTicket</span> s'occupe du reste.</h1>
+      <div class="hero-title-wrapper" data-aos="fade-up">
+        <h1 class="hero-title">
+          Vivez l'instant, <br>
+          <span class="animated-underline-wrapper">
+            <span class="text-highlight">SeneTicket</span>
+            <svg class="animated-underline-svg" viewBox="0 0 300 20" preserveAspectRatio="none">
+              <path class="animated-underline-path"
+                d="M 0,10 Q 75,0 150,10 Q 225,20 300,10"
+                fill="none"
+                stroke="var(--color-primary)"
+                stroke-width="5"
+                stroke-linecap="round"
+                pathLength="1" />
+            </svg>
+          </span> 
+          s'occupe du reste.
+        </h1>
+      </div>
       <p data-aos="fade-up" data-aos-delay="100">Plus de 500 événements au Sénégal à portée de main.</p>
-      
-      <!-- Barre de recherche solide -->
-      <div class="solid-search-bar" data-aos="zoom-in" data-aos-delay="200">
-        <div class="search-field">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          <input type="text" placeholder="Rechercher un événement...">
-        </div>
-        <div class="search-divider"></div>
-        <div class="search-field">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-          <select>
-            <option value="">Où ?</option>
-            <option value="dakar">Dakar</option>
-            <option value="saly">Saly</option>
-            <option value="saint-louis">Saint-Louis</option>
-          </select>
-        </div>
-        <button class="btn-solid-primary">Rechercher</button>
+      <div class="hero-actions" data-aos="fade-up" data-aos-delay="200" style="margin-top: 32px; display: flex; gap: 16px; flex-wrap: wrap;">
+        <a class="btn-solid-primary" routerLink="/categories" style="text-decoration: none;">Explorer les Événements</a>
+        <a class="btn-solid-white" routerLink="/evenement/1" style="text-decoration: none;">Réserver un Billet</a>
       </div>
     </div>
-    <div class="hero-image" data-aos="fade-left">
-      <img src="images/hero-image.png" alt="Concert vibrant">
-    </div>
-  </section>
-
-  <!-- Statistiques (Preuve sociale) -->
-  <section class="stats-section">
-    <div class="stats-grid">
-      <div class="stat-card" *ngFor="let stat of statistiques; let i = index" data-aos="fade-up" [attr.data-aos-delay]="i * 100">
-        <h3>{{ stat.valeur }}</h3>
-        <p>{{ stat.label }}</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Agenda Rapide (Liste vivante) -->
-  <section class="agenda-section">
-    <div class="section-header" data-aos="fade-right">
-      <h2>Prochainement à Dakar</h2>
-      <a href="#" class="btn-solid-secondary">Voir tout l'agenda</a>
-    </div>
-    
-    <div class="agenda-list">
-      <div class="agenda-item" *ngFor="let event of prochainsEvenements; let i = index" data-aos="fade-up" [attr.data-aos-delay]="i * 100">
-        <div class="agenda-date">
-          <span class="day">{{ event.jour }}</span>
-          <span class="month">{{ event.mois }}</span>
-        </div>
-        <div class="agenda-img">
-          <img [src]="event.image" alt="Event image">
-        </div>
-        <div class="agenda-details">
-          <h4>{{ event.titre }}</h4>
-          <p>
-            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            {{ event.heure }} &bull; 
-            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            {{ event.lieu }}
-          </p>
-        </div>
-        <div class="agenda-action">
-          <button class="btn-solid-primary small">Billets</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Catégories Solides -->
-  <section class="categories-section">
-    <div class="section-header text-center" data-aos="fade-up">
-      <h2>Explorez par Passions</h2>
-    </div>
-    
-    <div class="categories-grid">
-      <div class="solid-category-card" *ngFor="let cat of categories; let i = index" data-aos="zoom-in" [attr.data-aos-delay]="i * 100" [style.borderBottomColor]="cat.couleurIcone">
-        <div class="icon-circle" [style.backgroundColor]="cat.couleurFond" [style.color]="cat.couleurIcone">
-          <ng-container [ngSwitch]="cat.nom">
-            <svg *ngSwitchCase="'Musique'" viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-            <svg *ngSwitchCase="'Arts'" viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="5.5" r="1.5"></circle><circle cx="17.5" cy="10.5" r="1.5"></circle><circle cx="8.5" cy="7.5" r="1.5"></circle><circle cx="6.5" cy="12.5" r="1.5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg>
-            <svg *ngSwitchCase="'Sports'" viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
-            <svg *ngSwitchCase="'Festivals'" viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2" ry="2"></rect><line x1="3" y1="12" x2="21" y2="12"></line><line x1="8" y1="8" x2="8" y2="20"></line></svg>
-          </ng-container>
-        </div>
-        <span class="cat-name">{{ cat.nom }}</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Top Destinations (Inspiré Eventbrite) -->
-  <section class="destinations-section">
-    <div class="section-header text-center" data-aos="fade-up">
-      <h2>Top Destinations</h2>
-      <p>Explorez les événements par ville au Sénégal.</p>
-    </div>
-    
-    <div class="destinations-grid">
-      <a href="#" class="destination-card" *ngFor="let dest of topDestinations; let i = index" data-aos="zoom-in" [attr.data-aos-delay]="i * 100">
-        <div class="dest-img-wrapper">
-          <img [src]="dest.image" [alt]="dest.nom">
-        </div>
-        <div class="dest-info">
-          <h3>{{ dest.nom }}</h3>
-          <p>{{ dest.nbEvenements }} événements</p>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- Événements à la Une (Grille Premium Classique) -->
-  <section class="featured-section">
-    <div class="section-header text-center" data-aos="fade-up">
-      <h2>Les Incontournables</h2>
-      <p>Ne manquez pas les événements les plus populaires du moment.</p>
-    </div>
-
-    <div class="solid-events-grid">
-      <div class="solid-event-card" *ngFor="let evenement of evenementsAlaUne; let i = index" data-aos="fade-up" [attr.data-aos-delay]="i * 100">
-        <div class="card-img-wrapper">
-          <img [src]="evenement.image" alt="Event Image">
-          <span class="solid-badge">{{ evenement.categorie }}</span>
-        </div>
-        <div class="card-content">
-          <div class="date-strip">
-            <span class="day">{{ evenement.date.split(' ')[0] }}</span>
-            <span class="month">{{ evenement.date.split(' ')[1] }}</span>
+    <div class="hero-visual" data-aos="fade-left">
+      <!-- Billet principal animé -->
+      <div class="hero-ticket float-animation">
+        <div class="ticket-inner">
+          <div class="ticket-top">
+            <div class="ticket-event-info">
+              <span class="ticket-category">MUSIQUE</span>
+              <h3 class="ticket-title">Festival de Dakar 2025</h3>
+              <p class="ticket-detail">
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Monument de la Renaissance
+              </p>
+              <p class="ticket-detail">
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                15 Oct 2025 &mdash; 20h00
+              </p>
+            </div>
+            <div class="ticket-price-badge">
+              <span class="price-amount">5 000</span>
+              <span class="price-currency">XOF</span>
+            </div>
           </div>
-          <h3>{{ evenement.titre }}</h3>
-          <p class="location">
-            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            {{ evenement.lieu }}
-          </p>
-          <div class="card-footer">
-            <span class="price" *ngIf="evenement.prix">{{ evenement.prix }}</span>
-            <button class="btn-solid-primary" [class.small]="!evenement.prix">
-              {{ evenement.prix ? 'Acheter' : 'Détails' }}
-            </button>
+          <div class="ticket-separator">
+            <div class="ticket-notch left"></div>
+            <div class="ticket-dash"></div>
+            <div class="ticket-notch right"></div>
+          </div>
+          <div class="ticket-bottom">
+            <div class="ticket-qr">
+              <div class="qr-grid">
+                <div class="qr-cell"></div><div class="qr-cell filled"></div><div class="qr-cell filled"></div><div class="qr-cell"></div><div class="qr-cell filled"></div>
+                <div class="qr-cell filled"></div><div class="qr-cell"></div><div class="qr-cell filled"></div><div class="qr-cell filled"></div><div class="qr-cell"></div>
+                <div class="qr-cell"></div><div class="qr-cell filled"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell filled"></div>
+                <div class="qr-cell filled"></div><div class="qr-cell filled"></div><div class="qr-cell"></div><div class="qr-cell filled"></div><div class="qr-cell filled"></div>
+                <div class="qr-cell filled"></div><div class="qr-cell"></div><div class="qr-cell filled"></div><div class="qr-cell"></div><div class="qr-cell"></div>
+              </div>
+              <span class="qr-label">Scannez pour entrer</span>
+            </div>
+            <div class="ticket-holder">
+              <span class="holder-label">PARTICIPANT</span>
+              <span class="holder-name">Ousmane D.</span>
+              <span class="holder-type">VIP &mdash; Rang A</span>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Notifications flottantes -->
+      <div class="hero-float-card float-card-1">
+        <div class="hfc-icon success">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div class="hfc-text">
+          <strong>Paiement Wave</strong>
+          <span>Billet envoy&eacute; par SMS</span>
+        </div>
+      </div>
+
+      <div class="hero-float-card float-card-2">
+        <div class="hfc-icon gold">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <div class="hfc-text">
+          <strong>Anti-fraude actif</strong>
+          <span>QR Code unique v&eacute;rifi&eacute;</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Comment ça marche (Étapes simples, Dark Mode Contrasté) -->
-  <section class="how-it-works-section">
-    <div class="section-header text-center" data-aos="fade-up">
-      <h2>Comment ça marche ?</h2>
-      <p>Votre prochain événement en 3 étapes simples.</p>
+  <!-- Section Recherche Indépendante -->
+  <section class="global-search-section">
+    <div class="solid-search-bar" data-aos="zoom-in" data-aos-delay="100">
+      <div class="search-field">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" placeholder="Rechercher un événement...">
+      </div>
+      <div class="search-divider"></div>
+      <div class="search-field">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        <select>
+          <option value="">Où ?</option>
+          <option value="dakar">Dakar</option>
+          <option value="saly">Saly</option>
+          <option value="saint-louis">Saint-Louis</option>
+        </select>
+      </div>
+      <button class="btn-island btn-island-primary">Rechercher <div class="btn-icon-wrapper"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div></button>
     </div>
+  </section>
 
-    <div class="steps-container">
-      <div class="step-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="step-number">1</div>
-        <div class="step-icon">
-          <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+  <!-- Marquee Band -->
+  <div class="marquee-band">
+    <div class="marquee-track">
+      <span><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="5" y="2" width="14" height="20" rx="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg> Paiement Wave &amp; Orange Money</span>
+      <span><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Billetterie 24h/7j</span>
+      <span><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> QR Code Anti-Fraude</span>
+      <span><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> Support WhatsApp</span>
+      <span><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg> Dashboard Temps R&eacute;el</span>
+      <span><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline></svg> Remboursement en 1 clic</span>
+      <span><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg> Check-in Instantan&eacute;</span>
+      <span><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> +500 &Eacute;v&eacute;nements</span>
+      <!-- Duplicate -->
+      <span><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="5" y="2" width="14" height="20" rx="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg> Paiement Wave &amp; Orange Money</span>
+      <span><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Billetterie 24h/7j</span>
+      <span><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> QR Code Anti-Fraude</span>
+      <span><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> Support WhatsApp</span>
+      <span><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg> Dashboard Temps R&eacute;el</span>
+      <span><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline></svg> Remboursement en 1 clic</span>
+      <span><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg> Check-in Instantan&eacute;</span>
+      <span><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> +500 &Eacute;v&eacute;nements</span>
+    </div>
+  </div>
+
+  <!-- Pain Points Section (Pourquoi SeneTicket B2B & B2C) -->
+  <section class="pain-points-section">
+    <div class="pain-points-container">
+
+      <!-- Colonne de gauche (Jaune/Orange clair) -->
+      <div class="pain-left-col" data-aos="fade-right">
+        <span class="pain-badge">⚡ LE CHAOS ACTUEL</span>
+        <h2>L'événementiel sans SeneTicket, c'est <span class="highlight-text">le chaos pour tous.</span></h2>
+        <p class="pain-desc">Organisateurs débordés par la gestion manuelle et participants frustrés par la complexité d'achat.</p>
+
+        <div class="fragmented-channels">
+          <p class="channels-title">LES CANAUX CLASSIQUES</p>
+          <div class="channels-grid">
+            <div class="channel-card">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+              <div class="channel-info"><span>Liste Excel</span><span class="status error">❌ NON SUIVI</span></div>
+            </div>
+            <div class="channel-card">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"></rect></svg>
+              <div class="channel-info"><span>Orange Money</span><span class="status warning">⚠ NON TRACÉ</span></div>
+            </div>
+            <div class="channel-card">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07"></path></svg>
+              <div class="channel-info"><span>WhatsApp</span><span class="status error">❌ ÉPARPILLÉ</span></div>
+            </div>
+            <div class="channel-card">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              <div class="channel-info"><span>Billet Papier</span><span class="status error">❌ FRAUDABLE</span></div>
+            </div>
+          </div>
         </div>
-        <h3>Trouvez un événement</h3>
-        <p>Explorez notre catalogue et trouvez l'événement qui vous fait vibrer à Dakar et partout au Sénégal.</p>
+
+        <div class="pain-big-stat">
+          <div class="stat-number">70<span class="percent">%</span></div>
+          <p class="stat-text">des organisateurs perdent du revenu et des participants abandonnent leur achat à cause d'un système inefficace.</p>
+        </div>
       </div>
 
-      <div class="step-connector"></div>
-
-      <div class="step-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="step-number">2</div>
-        <div class="step-icon">
-          <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+      <!-- Colonne de droite (Cartes claires) -->
+      <div class="pain-right-col" data-aos="fade-left">
+        <!-- Carte 01 -->
+        <div class="pain-card">
+          <span class="card-watermark">01</span>
+          <span class="pain-badge outline">🙎 PARTICIPANT</span>
+          <h3>Acheter un billet ? <span class="highlight-text-light">Un casse-tête.</span></h3>
+          <p class="card-desc">Se déplacer pour un billet papier, envoyer de l'argent sans reçu, ou attendre des heures une confirmation sur WhatsApp. L'expérience commence mal.</p>
+          <div class="metrics-row">
+            <div class="metric-box warning-bg">
+              <span class="metric-label">AVANT</span>
+              <span class="metric-val error-text">❌ Frustrant</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">AVEC SENETICKET</span>
+              <span class="metric-val">✓ En 3 clics</span>
+            </div>
+          </div>
         </div>
-        <h3>Réservez en 1 clic</h3>
-        <p>Payez en toute sécurité via Mobile Money (Orange Money, Wave) ou par carte bancaire.</p>
-      </div>
 
-      <div class="step-connector"></div>
-
-      <div class="step-card" data-aos="fade-up" data-aos-delay="300">
-        <div class="step-number">3</div>
-        <div class="step-icon">
-          <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        <!-- Carte 02 -->
+        <div class="pain-card">
+          <span class="card-watermark">02</span>
+          <span class="pain-badge outline">💼 ORGANISATEUR</span>
+          <h3>Des ventes <span class="highlight-text-light">incontrôlables.</span></h3>
+          <p class="card-desc">Impossible de savoir qui a vraiment payé. Des noms s'accumulent dans vos DMs Instagram et votre journal Orange Money.</p>
+          <div class="metrics-row">
+            <div class="metric-box warning-bg">
+              <span class="metric-label">GESTION ACTUELLE</span>
+              <span class="metric-val error-text">⚠ Manuelle</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">AVEC SENETICKET</span>
+              <span class="metric-val">✓ Automatisée</span>
+            </div>
+          </div>
         </div>
-        <h3>Profitez du moment</h3>
-        <p>Recevez votre e-billet avec QR code immédiatement. Présentez-le à l'entrée et amusez-vous !</p>
+
+        <!-- Carte 03 -->
+        <div class="pain-card">
+          <span class="card-watermark">03</span>
+          <span class="pain-badge outline">🚨 RISQUE</span>
+          <h3>Un contrôle d'accès <span class="highlight-text-light">chaotique.</span></h3>
+          <p class="card-desc">Des faux billets, des files d'attente interminables, et une entrée qui vire au cauchemar.</p>
+          <div class="progress-comparison">
+            <div class="progress-item">
+              <div class="progress-labels"><span class="prog-name">BILLET PAPIER</span><span class="prog-val">~15 sec/scan</span></div>
+              <div class="progress-bar-container"><div class="progress-fill bad" style="width: 85%"></div></div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-labels"><span class="prog-name">QR CODE SENETICKET</span><span class="prog-val">&lt;1 sec/scan</span></div>
+              <div class="progress-bar-container"><div class="progress-fill good" style="width: 8%"></div></div>
+            </div>
+          </div>
+          <div class="mini-stats-row">
+            <span class="mini-stat">🛡 Anti-fraude</span>
+            <span class="mini-stat">⚡ Instantané</span>
+            <span class="mini-stat">📊 Tracé</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -274,6 +328,298 @@
     </div>
   </section>
 
+  <!-- Section Organisateurs (B2B Dashboard) -->
+  <section class="organizer-section">
+    <div class="organizer-container">
+      <div class="organizer-text" data-aos="fade-right">
+        <span class="org-badge">🎯 POUR LES ORGANISATEURS</span>
+        <h2>Tout ce dont vous avez besoin pour <span class="org-highlight">gérer vos événements</span> comme un pro.</h2>
+        <p>Une plateforme pensée pour les créateurs d'événements sénégalais. Gagnez du temps, vendez plus, dormez tranquille.</p>
+        <div class="org-features">
+          <div class="org-feature" *ngFor="let avantage of avantagesOrganisateurs">
+            <div class="org-feature-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div class="org-feature-text">
+              <h4>{{ avantage.titre }}</h4>
+              <p>{{ avantage.description }}</p>
+            </div>
+          </div>
+        </div>
+        <button class="org-cta-btn">Créer mon événement gratuitement</button>
+      </div>
+      <div class="organizer-mockup" data-aos="fade-left">
+        <div class="dashboard-preview">
+          <div class="dp-header">
+            <span class="dp-title">Dashboard SeneTicket</span>
+            <span class="dp-live">● Live</span>
+          </div>
+          <div class="dp-stats">
+            <div class="dp-stat"><span class="dp-val">1 248</span><span class="dp-label">Billets vendus</span></div>
+            <div class="dp-stat"><span class="dp-val">2,4M</span><span class="dp-label">FCFA</span></div>
+            <div class="dp-stat"><span class="dp-val">98%</span><span class="dp-label">Scans OK</span></div>
+          </div>
+          <div class="dp-chart">
+            <div class="dp-bar" style="height:40%"></div>
+            <div class="dp-bar" style="height:65%"></div>
+            <div class="dp-bar" style="height:55%"></div>
+            <div class="dp-bar" style="height:80%"></div>
+            <div class="dp-bar active" style="height:100%"></div>
+            <div class="dp-bar" style="height:60%"></div>
+            <div class="dp-bar" style="height:75%"></div>
+          </div>
+          <div class="dp-activity">
+            <div class="dp-row"><span class="dp-dot"></span><span>Amadou D. — VIP Podium</span><span class="dp-qr">QR ✓</span></div>
+            <div class="dp-row"><span class="dp-dot scanned"></span><span>Fatou S. — Entrée principale</span><span class="dp-qr scanned">Scanné</span></div>
+            <div class="dp-row"><span class="dp-dot"></span><span>Mamadou K. — Tribune Est</span><span class="dp-qr">QR ✓</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comment ça marche (Étapes simples, Dark Mode Contrasté) -->
+  <section class="how-it-works-section">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2>Comment ça marche ?</h2>
+      <p>Votre prochain événement en 3 étapes simples.</p>
+    </div>
+
+    <div class="steps-container">
+      <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="step-number">1</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+        <h3>Trouvez un événement</h3>
+        <p>Explorez notre catalogue et trouvez l'événement qui vous fait vibrer à Dakar et partout au Sénégal.</p>
+      </div>
+
+      <div class="step-connector"></div>
+
+      <div class="step-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="step-number">2</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        </div>
+        <h3>Réservez en 1 clic</h3>
+        <p>Payez en toute sécurité via Mobile Money (Orange Money, Wave) ou par carte bancaire.</p>
+      </div>
+
+      <div class="step-connector"></div>
+
+      <div class="step-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="step-number">3</div>
+        <div class="step-icon highlight-qr">
+          <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>
+            <rect x="5" y="5" width="3" height="3"></rect><rect x="16" y="5" width="3" height="3"></rect>
+            <rect x="16" y="16" width="3" height="3"></rect><rect x="5" y="16" width="3" height="3"></rect>
+          </svg>
+        </div>
+        <h3>Votre Billet QR Code</h3>
+        <p>Recevez instantanément votre billet digital sous format QR Code, prêt à être scanné à l'entrée. Zéro papier, zéro file d'attente.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistiques (Preuve sociale) -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-card" *ngFor="let stat of statistiques; let i = index" data-aos="fade-up" [attr.data-aos-delay]="i * 100">
+        <h3>{{ stat.valeur }}</h3>
+        <p>{{ stat.label }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agenda Rapide (Liste vivante) -->
+  <section class="agenda-section">
+    <div class="section-header" data-aos="fade-right">
+      <h2>Prochainement à Dakar</h2>
+      <a href="#" class="btn-solid-secondary btn-island">Voir tout l'agenda <div class="btn-icon-wrapper"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div></a>
+    </div>
+    
+    <div class="agenda-list">
+      <div class="agenda-item" *ngFor="let event of prochainsEvenements; let i = index" data-aos="fade-up" [attr.data-aos-delay]="i * 100">
+        <div class="agenda-date">
+          <span class="day">{{ event.jour }}</span>
+          <span class="month">{{ event.mois }}</span>
+        </div>
+        <div class="agenda-img">
+          <img [src]="event.image" alt="Event image">
+        </div>
+        <div class="agenda-details">
+          <h4>{{ event.titre }}</h4>
+          <p>
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            {{ event.heure }} &bull; 
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            {{ event.lieu }}
+          </p>
+        </div>
+        <div class="agenda-action">
+          <button class="btn-solid-primary small">Billets</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Événements à la Une (Grille Premium Classique) -->
+  <section class="featured-section">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2>Les Incontournables</h2>
+      <p>Ne manquez pas les événements les plus populaires du moment.</p>
+    </div>
+
+    <div class="carousel-container">
+      <div class="carousel-wrapper">
+        <div *ngFor="let evenement of evenementsAlaUne; let i = index" 
+             class="carousel-item" 
+             [attr.data-pos]="getCarouselPos(i)">
+          <div class="carousel-card-inner">
+            <img [src]="evenement.image" [alt]="evenement.titre" class="carousel-img" />
+            <div class="carousel-overlay">
+              <span class="carousel-badge">{{ evenement.categorie }}</span>
+              <h3>{{ evenement.titre }}</h3>
+              <p>
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                {{ evenement.lieu }}
+              </p>
+              <div class="carousel-footer">
+                <span class="date">{{ evenement.date }}</span>
+                <button class="btn-island btn-island-primary">Réserver</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <button class="btn-carousel prev" (click)="prevCarousel()">
+        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button class="btn-carousel next" (click)="nextCarousel()">
+        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- Types d'événements (Secteurs) -->
+  <section class="sectors-section">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2>Pour chaque type d'&eacute;v&eacute;nement</h2>
+      <p>Une plateforme adapt&eacute;e &agrave; tous les formats, du concert intime au stade sold-out.</p>
+    </div>
+    <div class="sectors-grid">
+      <article class="sector-card" *ngFor="let type of typesEvenements; let i = index" data-aos="fade-up" [attr.data-aos-delay]="i * 100">
+        <div class="sector-inner">
+          <div class="sector-icon">
+            <ng-container [ngSwitch]="type.icon">
+              <svg *ngSwitchCase="'music'" viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+              <svg *ngSwitchCase="'mic'" viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+              <svg *ngSwitchCase="'trophy'" viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+              <svg *ngSwitchCase="'palette'" viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none"><circle cx="13.5" cy="6.5" r="0.5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r="0.5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r="0.5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r="0.5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg>
+            </ng-container>
+          </div>
+          <div class="sector-info">
+            <h3>{{ type.nom }}</h3>
+            <p>{{ type.description }}</p>
+          </div>
+          <span class="sector-count">{{ type.count }}</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Catégories Solides -->
+  <section class="categories-section">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2>Explorez par Passions</h2>
+    </div>
+    
+    <div class="categories-grid">
+      <div class="solid-category-card" *ngFor="let cat of categories; let i = index" data-aos="zoom-in" [attr.data-aos-delay]="i * 100" [style.borderBottomColor]="cat.couleurIcone">
+        <div class="icon-circle" [style.backgroundColor]="cat.couleurFond" [style.color]="cat.couleurIcone">
+          <ng-container [ngSwitch]="cat.nom">
+            <svg *ngSwitchCase="'Musique'" viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+            <svg *ngSwitchCase="'Arts'" viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="5.5" r="1.5"></circle><circle cx="17.5" cy="10.5" r="1.5"></circle><circle cx="8.5" cy="7.5" r="1.5"></circle><circle cx="6.5" cy="12.5" r="1.5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg>
+            <svg *ngSwitchCase="'Sports'" viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
+            <svg *ngSwitchCase="'Festivals'" viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2" ry="2"></rect><line x1="3" y1="12" x2="21" y2="12"></line><line x1="8" y1="8" x2="8" y2="20"></line></svg>
+          </ng-container>
+        </div>
+        <span class="cat-name">{{ cat.nom }}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Destinations (Inspiré Eventbrite) -->
+  <section class="destinations-section">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2>Top Destinations</h2>
+      <p>Explorez les événements par ville au Sénégal.</p>
+    </div>
+    
+    <div class="destinations-grid">
+      <a href="#" class="destination-card" *ngFor="let dest of topDestinations; let i = index" data-aos="zoom-in" [attr.data-aos-delay]="i * 100">
+        <div class="dest-img-wrapper">
+          <img [src]="dest.image" [alt]="dest.nom">
+        </div>
+        <div class="dest-info">
+          <h3>{{ dest.nom }}</h3>
+          <p>{{ dest.nbEvenements }} événements</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Section Témoignages -->
+  <section class="testimonials-section" id="temoignages">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2>Ils nous font confiance</h2>
+      <p>Organisateurs et participants partagent leur expérience avec SeneTicket.</p>
+    </div>
+    <div class="testimonials-grid">
+      <article class="testimonial-card" *ngFor="let t of temoignages; let i = index" data-aos="fade-up" [attr.data-aos-delay]="i * 100">
+        <div class="testimonial-stars">
+          <span *ngFor="let star of [1,2,3,4,5]" [class.filled]="star <= t.note">★</span>
+        </div>
+        <blockquote class="testimonial-text">&laquo; {{ t.texte }} &raquo;</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar">{{ t.initiales }}</div>
+          <div class="author-info">
+            <strong>{{ t.nom }}</strong>
+            <span>{{ t.role }} &mdash; {{ t.ville }}</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Section FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="faq-container">
+      <div class="faq-header" data-aos="fade-right">
+        <span class="faq-badge">FAQ</span>
+        <h2>Questions fréquentes</h2>
+        <p>Tout ce que vous devez savoir avant d'acheter votre premier billet ou de créer votre événement.</p>
+      </div>
+      <div class="faq-list" data-aos="fade-left">
+        <div class="faq-item" *ngFor="let item of faqItems; let i = index" [class.active]="activeQuestionIndex === i">
+          <button class="faq-question" (click)="toggleQuestion(i)">
+            <span>{{ item.question }}</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer" [style.maxHeight]="activeQuestionIndex === i ? '300px' : '0'">
+            <p>{{ item.reponse }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA Section: Bandeau coloré ultra-vivant -->
   <section class="cta-section">
     <div class="cta-banner" data-aos="zoom-in">
@@ -281,8 +627,8 @@
         <h2>Prêt à lancer votre prochain événement ?</h2>
         <p>Rejoignez les organisateurs qui font confiance à SeneTicket pour booster leurs ventes et offrir la meilleure expérience.</p>
         <div class="cta-buttons">
-          <button class="btn-solid-primary">Créer un événement</button>
-          <a href="#" class="btn-solid-secondary">Contacter le support</a>
+          <button class="btn-island btn-island-primary">Créer un événement <div class="btn-icon-wrapper"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div></button>
+          <a href="#" class="btn-solid-secondary btn-island">Contacter le support <div class="btn-icon-wrapper"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div></a>
         </div>
       </div>
       <div class="cta-illustration">
@@ -291,3 +637,11 @@
     </div>
   </section>
 </div>
+
+<!-- Bouton WhatsApp Flottant -->
+<a href="https://wa.me/221770000000?text=Bonjour%20SeneTicket%20!" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contacter via WhatsApp">
+  <svg viewBox="0 0 32 32" width="28" height="28" fill="white">
+    <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.13 6.742 3.046 9.378L1.05 31.126l5.96-1.966C9.526 30.93 12.636 32 16.004 32 24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.35 22.6c-.39 1.1-1.932 2.014-3.148 2.28-.832.178-1.918.32-5.574-1.198-4.678-1.94-7.688-6.684-7.924-6.994-.226-.31-1.9-2.532-1.9-4.83s1.2-3.428 1.628-3.896c.428-.468.934-.586 1.246-.586.312 0 .624.002.896.016.288.014.674-.11 1.054.804.39.936 1.326 3.234 1.442 3.468.116.234.194.508.04.818-.156.312-.234.506-.468.78-.234.274-.492.612-.702.82-.234.234-.478.488-.206.958.274.468 1.216 2.006 2.612 3.25 1.794 1.598 3.306 2.094 3.774 2.328.468.234.742.196 1.014-.118.274-.312 1.17-1.364 1.482-1.832.312-.468.624-.39 1.054-.234.43.156 2.726 1.286 3.194 1.52.468.234.78.352.896.546.116.196.116 1.12-.274 2.22z"/>
+  </svg>
+  <span class="whatsapp-tooltip">Besoin d'aide ?</span>
+</a>

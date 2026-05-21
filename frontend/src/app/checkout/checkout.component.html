@@ -1,0 +1,140 @@
+<div class="checkout-container" *ngIf="reservation || currentStep === 4">
+  
+  <div class="checkout-header" *ngIf="currentStep < 4">
+    <a routerLink="/" class="back-link">
+      <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Annuler
+    </a>
+    <div class="stepper">
+      <div class="step" [class.active]="currentStep >= 1">1. Panier</div>
+      <div class="step-divider"></div>
+      <div class="step" [class.active]="currentStep >= 2">2. Infos</div>
+      <div class="step-divider"></div>
+      <div class="step" [class.active]="currentStep >= 3">3. Paiement</div>
+    </div>
+  </div>
+
+  <div class="checkout-content" *ngIf="currentStep < 4">
+    <!-- Left Column: Dynamic Step Content -->
+    <div class="checkout-main">
+      
+      <!-- Step 1: Recap -->
+      <div class="step-content" *ngIf="currentStep === 1" data-aos="fade-up">
+        <h2>Récapitulatif de votre commande</h2>
+        <div class="recap-list">
+          <div class="recap-item" *ngFor="let ticket of reservation?.tickets">
+            <div class="ticket-type">
+              <strong>{{ ticket.nom }}</strong>
+              <span>{{ ticket.quantite }}x {{ formatPrice(ticket.prix) }} XOF</span>
+            </div>
+            <div class="ticket-subtotal">
+              <strong>{{ formatPrice(ticket.prix * ticket.quantite) }} XOF</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: User Info -->
+      <div class="step-content" *ngIf="currentStep === 2" data-aos="fade-up">
+        <h2>Vos informations</h2>
+        <form [formGroup]="checkoutForm" class="checkout-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Prénom</label>
+              <input type="text" formControlName="prenom" placeholder="Ex: Aliou">
+              <span class="error" *ngIf="checkoutForm.get('prenom')?.touched && checkoutForm.get('prenom')?.invalid">Champ requis</span>
+            </div>
+            <div class="form-group">
+              <label>Nom</label>
+              <input type="text" formControlName="nom" placeholder="Ex: Ndiaye">
+              <span class="error" *ngIf="checkoutForm.get('nom')?.touched && checkoutForm.get('nom')?.invalid">Champ requis</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" formControlName="email" placeholder="Ex: aliou@example.com">
+            <span class="error" *ngIf="checkoutForm.get('email')?.touched && checkoutForm.get('email')?.invalid">Email invalide</span>
+          </div>
+          <div class="form-group">
+            <label>Téléphone</label>
+            <input type="tel" formControlName="telephone" placeholder="Ex: 77 000 00 00">
+            <span class="error" *ngIf="checkoutForm.get('telephone')?.touched && checkoutForm.get('telephone')?.invalid">Téléphone requis</span>
+          </div>
+        </form>
+      </div>
+
+      <!-- Step 3: Payment -->
+      <div class="step-content" *ngIf="currentStep === 3" data-aos="fade-up">
+        <h2>Moyen de paiement</h2>
+        <div class="payment-methods">
+          <button class="payment-btn" [class.selected]="paymentMethod === 'wave'" (click)="setPaymentMethod('wave')">
+            <div class="pm-logo wave">W</div>
+            <span>Wave Mobile Money</span>
+          </button>
+          <button class="payment-btn" [class.selected]="paymentMethod === 'orange_money'" (click)="setPaymentMethod('orange_money')">
+            <div class="pm-logo om">O</div>
+            <span>Orange Money</span>
+          </button>
+          <button class="payment-btn" [class.selected]="paymentMethod === 'cb'" (click)="setPaymentMethod('cb')">
+            <div class="pm-logo cb">💳</div>
+            <span>Carte Bancaire</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Order Summary Side Panel -->
+    <aside class="checkout-sidebar" data-aos="fade-left">
+      <div class="summary-card">
+        <img [src]="reservation?.image" alt="Event" class="event-img">
+        <div class="event-details">
+          <h3>{{ reservation?.titre }}</h3>
+          <p>{{ reservation?.date }} • {{ reservation?.lieu }}</p>
+        </div>
+        
+        <div class="summary-totals">
+          <div class="total-line">
+            <span>Total Billets</span>
+            <span>{{ reservation?.totalTickets }}</span>
+          </div>
+          <div class="total-line grand-total">
+            <span>Total à payer</span>
+            <strong>{{ formatPrice(reservation?.totalAmount || 0) }} XOF</strong>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn-prev" *ngIf="currentStep > 1" (click)="prevStep()" [disabled]="isProcessing">Retour</button>
+          <button class="btn-next" (click)="nextStep()" [disabled]="isProcessing">
+            <span *ngIf="!isProcessing && currentStep < 3">Continuer</span>
+            <span *ngIf="!isProcessing && currentStep === 3">Payer {{ formatPrice(reservation?.totalAmount || 0) }} XOF</span>
+            <span *ngIf="isProcessing">Traitement...</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Step 4: Success -->
+  <div class="success-screen" *ngIf="currentStep === 4" data-aos="zoom-in">
+    <div class="success-card">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" width="48" height="48" stroke="#10B981" stroke-width="2" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+      </div>
+      <h2>Paiement réussi !</h2>
+      <p>Votre réservation a bien été confirmée. Vous allez recevoir vos billets par email et SMS dans quelques instants.</p>
+      
+      <div class="qr-code-placeholder">
+        <!-- Faux QR Code -->
+        <svg viewBox="0 0 100 100" width="150" height="150">
+          <rect width="100" height="100" fill="#fff"></rect>
+          <path d="M10 10h20v20h-20zM70 10h20v20h-20zM10 70h20v20h-20zM40 10h20v10h-20zM40 30h10v20h-10zM60 40h30v10h-30zM20 40h10v20h-10zM40 60h20v10h-20zM70 70h10v10h-10zM80 80h10v10h-10zM15 15h10v10h-10zM75 15h10v10h-10zM15 75h10v10h-10z" fill="#111827"></path>
+        </svg>
+      </div>
+      <span class="ticket-id">Billet #{{ ticketId }}</span>
+      
+      <button class="btn-solid-dark" routerLink="/dashboard/participant" style="margin-top: 30px;">Voir mes billets</button>
+    </div>
+  </div>
+
+</div>

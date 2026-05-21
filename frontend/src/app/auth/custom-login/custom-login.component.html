@@ -1,0 +1,64 @@
+<div class="auth-wrapper">
+  <div class="premium-bezel-outer" style="max-width: 420px; width: 100%;">
+    <div class="premium-bezel-inner auth-card">
+    <!-- Zone Logo -->
+    <div class="logo-section">
+      <img src="/images/undraw_login_weas.svg" alt="Illustration de connexion" class="hero-illustration">
+      
+      <h1>Bienvenue sur SeneTicket !</h1>
+      <p>Connectez-vous pour participer</p>
+    </div>
+
+    <!-- Formulaire -->
+    <form (ngSubmit)="login()" class="auth-form">
+      
+      <div *ngIf="errors.length" class="alert-error">
+        <ul><li *ngFor="let error of errors">{{ error }}</li></ul>
+      </div>
+      
+      <div *ngIf="messages.length" class="alert-success">
+        <ul><li *ngFor="let message of messages">{{ message }}</li></ul>
+      </div>
+
+      <!-- Champ Email -->
+      <div class="input-container">
+        <span class="input-label">Email</span>
+        <input name="email" [(ngModel)]="email" placeholder="votre@email.com" required>
+      </div>
+      
+      <!-- Champ Mot de passe -->
+      <div class="input-container">
+        <span class="input-label">Mot de passe</span>
+        <input type="password" name="password" [(ngModel)]="password" placeholder="••••••••" required>
+        <!-- Icône oeil simulée -->
+        <svg class="eye-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+      </div>
+
+      <button type="submit" class="btn-island btn-island-primary animated-border-yellow" [disabled]="submitted" [class.btn-pulse]="submitted" style="width: 100%; justify-content: center; margin-top: 16px;">
+        SE CONNECTER
+        <div class="btn-icon-wrapper">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </div>
+      </button>
+      <a href="#" class="forgot-link">Mot de passe oublié ?</a>
+    </form>
+
+    <div class="register-prompt">
+      Vous n'avez pas de compte ? <a href="#">S'inscrire!</a>
+    </div>
+    
+    <!-- Outils de dev / Mock -->
+    <div class="mock-tools">
+      <div class="mock-buttons">
+        <button type="button" (click)="testerRole('admin')">Admin</button>
+        <button type="button" (click)="testerRole('agent')">Agent</button>
+        <button type="button" (click)="testerRole('client')">Client</button>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</div>

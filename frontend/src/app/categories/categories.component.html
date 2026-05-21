@@ -74,7 +74,18 @@
               <span class="sub-tag" *ngIf="cat.sousCategories.length > 3">+{{ cat.sousCategories.length - 3 }}</span>
             </div>
 
-            <button class="btn-explore">
+            <!-- Barre de popularité -->
+            <div class="popularity-bar">
+              <div class="popularity-labels">
+                <span class="popularity-label">Popularité</span>
+                <span class="popularity-value">{{ cat.evenements }} événements</span>
+              </div>
+              <div class="popularity-track">
+                <div class="popularity-fill" [style.width]="(cat.evenements / 42 * 100) + '%'"></div>
+              </div>
+            </div>
+
+            <button class="btn-explore" (click)="explorerCategorie(cat.nom)">
               Explorer
               <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" style="margin-left: 8px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </button>
@@ -108,7 +119,7 @@
           <p class="event-location">📍 {{ ev.lieu }}</p>
           <div class="event-footer">
             <span class="event-price">{{ ev.prix }}</span>
-            <button class="btn-book">Réserver</button>
+            <button class="btn-book" (click)="reserverEvenement(ev.id)">Réserver</button>
           </div>
         </div>
       </div>

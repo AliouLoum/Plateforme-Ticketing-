@@ -1,0 +1,128 @@
+<div class="event-detail-container">
+
+  <!-- Hero Banner -->
+  <section class="event-hero" [style.backgroundImage]="'url(' + evenement.image + ')'">
+    <div class="hero-overlay"></div>
+    <div class="hero-content" data-aos="fade-up">
+      <a routerLink="/" class="back-link">
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Retour
+      </a>
+      <span class="event-badge">{{ evenement.categorie }}</span>
+      <h1>{{ evenement.titre }}</h1>
+      <div class="hero-meta">
+        <span class="meta-item">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          {{ evenement.date }}
+        </span>
+        <span class="meta-item">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          {{ evenement.heure }}
+        </span>
+        <span class="meta-item">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          {{ evenement.lieu }}, {{ evenement.ville }}
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Grid -->
+  <div class="detail-grid">
+
+    <!-- Left Column: Details -->
+    <div class="detail-left">
+
+      <!-- Description -->
+      <section class="detail-section" data-aos="fade-up">
+        <h2>À propos</h2>
+        <p class="event-description">{{ evenement.description }}</p>
+      </section>
+
+      <!-- Programme -->
+      <section class="detail-section" data-aos="fade-up">
+        <h2>Programme</h2>
+        <div class="timeline">
+          <div class="timeline-item" *ngFor="let item of evenement.programme">
+            <span class="timeline-time">{{ item.heure }}</span>
+            <div class="timeline-dot"></div>
+            <span class="timeline-title">{{ item.titre }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Infos pratiques -->
+      <section class="detail-section" data-aos="fade-up">
+        <h2>Infos pratiques</h2>
+        <div class="infos-grid">
+          <div class="info-chip" *ngFor="let info of evenement.infos">
+            <svg *ngIf="info.icon === 'parking'" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M9 17V7h4a3 3 0 0 1 0 6H9"></path></svg>
+            <svg *ngIf="info.icon === 'wifi'" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><circle cx="12" cy="20" r="1"></circle></svg>
+            <svg *ngIf="info.icon === 'food'" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+            <svg *ngIf="info.icon === 'pmr'" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="8" r="2"></circle><path d="M12 10v4"></path><path d="M10 14h4"></path></svg>
+            <span>{{ info.label }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Lieu -->
+      <section class="detail-section" data-aos="fade-up">
+        <h2>Lieu</h2>
+        <div class="location-card">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <div>
+            <strong>{{ evenement.lieu }}</strong>
+            <span>{{ evenement.adresse }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Organisateur -->
+      <section class="detail-section" data-aos="fade-up">
+        <h2>Organisateur</h2>
+        <div class="organizer-card">
+          <div class="org-avatar">{{ evenement.organisateur.charAt(0) }}</div>
+          <div class="org-info">
+            <strong>{{ evenement.organisateur }}</strong>
+            <span>Organisateur vérifié ✓</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Right Column: Tickets -->
+    <aside class="detail-right" data-aos="fade-left">
+      <div class="tickets-panel">
+        <h3>Choisissez vos billets</h3>
+
+        <div class="ticket-option" *ngFor="let ticket of evenement.tickets">
+          <div class="ticket-info">
+            <strong>{{ ticket.nom }}</strong>
+            <span class="ticket-desc">{{ ticket.description }}</span>
+            <span class="ticket-dispo">{{ ticket.disponible }} restants</span>
+          </div>
+          <div class="ticket-price">{{ formatPrice(ticket.prix) }} XOF</div>
+          <div class="ticket-counter">
+            <button class="counter-btn" (click)="removeTicket(ticket.id)" [disabled]="getTicketCount(ticket.id) === 0">−</button>
+            <span class="counter-val">{{ getTicketCount(ticket.id) }}</span>
+            <button class="counter-btn" (click)="addTicket(ticket.id)">+</button>
+          </div>
+        </div>
+
+        <!-- Total & CTA -->
+        <div class="ticket-total" *ngIf="totalTickets > 0">
+          <div class="total-line">
+            <span>{{ totalTickets }} billet(s)</span>
+            <strong>{{ formatPrice(totalAmount) }} XOF</strong>
+          </div>
+          <button class="btn-buy" (click)="acheter()">
+            Acheter maintenant
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+          <p class="payment-hint">Paiement sécurisé via Wave, Orange Money ou CB</p>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</div>

@@ -1,12 +1,13 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import AOS from 'aos';
 
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
@@ -75,6 +76,7 @@ export class CategoriesComponent implements OnInit {
 
   evenementsPhare = [
     {
+      id: 1,
       titre: 'Dakar Fashion Week 2026',
       date: '12 NOV',
       categorie: 'Arts & Culture',
@@ -83,6 +85,7 @@ export class CategoriesComponent implements OnInit {
       image: 'images/art_culture.jpg'
     },
     {
+      id: 2,
       titre: 'Concert Afrobeats XXL',
       date: '05 DEC',
       categorie: 'Musique',
@@ -91,6 +94,7 @@ export class CategoriesComponent implements OnInit {
       image: 'images/Afrobeats_concert_crowd_at_night_202604290121.jpeg'
     },
     {
+      id: 3,
       titre: 'Tech Africa Summit',
       date: '20 NOV',
       categorie: 'Tech & Conférences',
@@ -100,7 +104,19 @@ export class CategoriesComponent implements OnInit {
     }
   ];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) {}
+
+  explorerCategorie(nom: string) {
+    this.searchTerm = nom;
+    setTimeout(() => {
+      const el = document.querySelector('.featured-events-section');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  reserverEvenement(id: number) {
+    this.router.navigate(['/evenement', id]);
+  }
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {

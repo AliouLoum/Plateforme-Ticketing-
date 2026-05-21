@@ -32,11 +32,11 @@ button {
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   &:active { transform: scale(0.96); }
-  &:focus-visible { outline: 2px solid #FFC107; outline-offset: 2px; }
+  &:focus-visible { outline: 2px solid #FFD700; outline-offset: 2px; }
 }
 
 .btn-solid-primary {
-  background: #FFC107;
+  background: #FFD700;
   color: #111827;
   border: none;
   padding: 14px 28px;
@@ -100,7 +100,7 @@ button {
     max-width: 800px;
 
     .badge-solid {
-      background: #FFC107;
+      background: #FFD700;
       color: #111827;
       padding: 8px 16px;
       border-radius: 999px;
@@ -114,17 +114,62 @@ button {
     }
 
     h1 {
+      color: #FFFFFF !important;
       font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 900;
       line-height: 1.1;
       margin-bottom: 20px;
-      .text-highlight { color: #FFC107; }
+      .text-highlight { color: #FFD700; }
     }
 
     p {
       font-size: 1.25rem;
       color: #9CA3AF;
     }
+  }
+}
+
+/* === LIEUX STATS BAND === */
+.lieux-stats-band {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  padding: 28px 5%;
+  background: white;
+  border-bottom: 1px solid #F3F4F6;
+  flex-wrap: wrap;
+
+  .lieux-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 0 40px;
+
+    @media (max-width: 768px) { padding: 8px 20px; }
+
+    .lieux-stat-val {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #111827;
+    }
+
+    .lieux-stat-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #6B7280;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
+
+  .lieux-stat-divider {
+    width: 1px;
+    height: 40px;
+    background: #E5E7EB;
+
+    @media (max-width: 768px) { display: none; }
   }
 }
 
@@ -135,7 +180,7 @@ button {
 
   .venues-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
     gap: 32px;
     max-width: 1200px;
     margin: 0 auto;
@@ -219,7 +264,7 @@ button {
             font-weight: 600;
             font-size: 0.95rem;
 
-            svg { color: #FFC107; }
+            svg { color: #FFD700; }
           }
         }
 
@@ -255,6 +300,8 @@ button {
     overflow: hidden;
     box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.05);
 
+    @media (max-width: 768px) { padding: 32px 20px; border-radius: 20px; }
+
     &::before {
       content: '';
       position: absolute;
@@ -272,8 +319,8 @@ button {
       max-width: 600px;
       margin: 0 auto;
 
-      h2 { font-size: 2.5rem; font-weight: 900; color: #111827; margin-bottom: 16px; }
-      p { font-size: 1.2rem; color: #4B5563; margin-bottom: 40px; }
+      h2 { font-size: clamp(1.6rem, 4vw, 2.5rem); font-weight: 900; color: #111827; margin-bottom: 16px; }
+      p { font-size: clamp(1rem, 2.5vw, 1.2rem); color: #4B5563; margin-bottom: 40px; }
 
       .cta-buttons {
         display: flex;
@@ -314,6 +361,7 @@ button {
     position: relative;
     max-width: 600px;
     margin: 0 auto 24px;
+    width: 100%;
     
     .search-icon {
       position: absolute;
@@ -334,7 +382,7 @@ button {
       
       &:focus {
         outline: none;
-        border-color: #FFC107;
+        border-color: #FFD700;
         box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.1);
       }
     }
@@ -452,7 +500,7 @@ button {
   transition: all 0.2s;
   
   &:hover {
-    border-color: #FFC107;
+    border-color: #FFD700;
     background: #FFFBEB;
     color: #B45309;
   }

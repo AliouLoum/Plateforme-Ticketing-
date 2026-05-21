@@ -1,0 +1,224 @@
+<nb-layout>
+
+  <!-- ======= SIDEBAR ======= -->
+  <nb-sidebar tag="agent-sidebar" state="expanded">
+    <nb-sidebar-header class="sidebar-brand">
+      <a routerLink="/" class="logo-link">
+        <span class="logo-sene">Sene</span><span class="logo-ticket">Ticket</span>
+      </a>
+      <span class="badge-senegal">ORGANISATEUR</span>
+    </nb-sidebar-header>
+    
+    <nb-menu [items]="menuItems" tag="agent-menu"></nb-menu>
+    
+    <nb-sidebar-footer class="sidebar-footer">
+      <nb-user name="Aliou Loum" title="Dakar Events Pro" size="small" [showInitials]="true"></nb-user>
+      <button nbButton ghost size="tiny" class="logout-btn" (click)="logout()" title="Déconnexion">
+        <nb-icon icon="log-out-outline"></nb-icon>
+      </button>
+    </nb-sidebar-footer>
+  </nb-sidebar>
+
+  <!-- ======= HEADER ======= -->
+  <nb-layout-header fixed>
+    <nav class="header-bar" aria-label="Barre d'outils agent">
+      <button nbButton ghost (click)="toggleSidebar()" aria-label="Ouvrir le menu">
+        <nb-icon icon="menu-2-outline"></nb-icon>
+      </button>
+      <div class="hdr-title">
+        <h1>Dashboard Organisateur</h1>
+        <time class="hdr-date">{{ today | date:'EEEE d MMMM yyyy':'':'fr' }}</time>
+      </div>
+      <div class="hdr-actions">
+        <button nbButton size="small" outline status="basic" style="margin-right:8px;">
+          <nb-icon icon="bell-outline"></nb-icon>
+        </button>
+        <a routerLink="/creer-evenement" nbButton size="small" status="warning" class="btn-site">
+          <nb-icon icon="plus-outline"></nb-icon>
+          Créer un événement
+        </a>
+      </div>
+    </nav>
+  </nb-layout-header>
+
+  <nb-layout-column>
+
+    <!-- ========== TABLEAU DE BORD ========== -->
+    <ng-container *ngIf="activeSection === 'overview'">
+
+      <!-- KPI Row -->
+      <section class="kpi-row" aria-label="Indicateurs clés">
+        <article *ngFor="let kpi of kpis" class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon-wrap"><nb-icon [icon]="kpi.icon"></nb-icon></div>
+            <span class="kpi-trend" [class.up]="kpi.trendUp">{{ kpi.trend }}</span>
+          </div>
+          <strong class="kpi-value">{{ kpi.value }}</strong>
+          <span class="kpi-label">{{ kpi.label }}</span>
+        </article>
+      </section>
+
+      <!-- Quick Stats Bar -->
+      <section class="quick-bar" aria-label="Statistiques du jour">
+        <div class="qb-item">
+          <nb-icon icon="flash-outline"></nb-icon>
+          <div><strong>{{ quickStats.ventesAuj }}</strong><span>Billets aujourd'hui</span></div>
+        </div>
+        <div class="qb-divider"></div>
+        <div class="qb-item">
+          <nb-icon icon="credit-card-outline"></nb-icon>
+          <div><strong>{{ quickStats.revenuAuj }} CFA</strong><span>Revenu aujourd'hui</span></div>
+        </div>
+        <div class="qb-divider"></div>
+        <div class="qb-item">
+          <nb-icon icon="trending-up-outline"></nb-icon>
+          <div><strong>{{ quickStats.tauxConversion }}%</strong><span>Taux de conversion</span></div>
+        </div>
+        <div class="qb-divider"></div>
+        <div class="qb-item">
+          <nb-icon icon="people-outline"></nb-icon>
+          <div><strong>{{ quickStats.visiteursActifs }}</strong><span>Visiteurs page event</span></div>
+        </div>
+        <div class="qb-divider"></div>
+        <div class="qb-item">
+          <nb-icon icon="smartphone-outline"></nb-icon>
+          <div><strong>{{ quickStats.scansLive }}</strong><span>Billets scannés live</span></div>
+        </div>
+      </section>
+
+      <!-- Charts Row -->
+      <section class="charts-area">
+        <nb-card class="chart-card chart-main">
+          <nb-card-header>
+            <div class="ch-title"><nb-icon icon="bar-chart-outline"></nb-icon> Vos Revenus</div>
+            <span class="ch-badge">+12.5%</span>
+          </nb-card-header>
+          <nb-card-body>
+            <p class="big-number">6 200 000 <small>CFA</small></p>
+            <highcharts-chart [options]="revenueChartOptions" style="width:100%;display:block"></highcharts-chart>
+          </nb-card-body>
+        </nb-card>
+
+        <div class="charts-side">
+          <nb-card class="chart-card">
+            <nb-card-header>
+              <div class="ch-title"><nb-icon icon="trending-up-outline"></nb-icon> Évolution des Ventes</div>
+              <span class="ch-badge teal">+15%</span>
+            </nb-card-header>
+            <nb-card-body>
+              <highcharts-chart [options]="salesChartOptions" style="width:100%;display:block"></highcharts-chart>
+            </nb-card-body>
+          </nb-card>
+
+          <nb-card class="activity-card">
+            <nb-card-header>
+              <div class="ch-title"><nb-icon icon="activity-outline"></nb-icon> Activité récente</div>
+            </nb-card-header>
+            <nb-card-body>
+              <div class="timeline">
+                <div *ngFor="let act of recentActivity" class="tl-item">
+                  <div class="tl-dot" [attr.data-type]="act.type"></div>
+                  <div class="tl-content">
+                    <p>{{ act.message }}</p>
+                    <small>{{ act.time }}</small>
+                  </div>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </section>
+
+      <!-- Alertes Creative Row -->
+      <header class="section-head" style="margin-top: 30px;">
+        <h2>Alertes &amp; Notifications</h2>
+        <span class="section-count">{{ systemAlerts.length }} nouvelles</span>
+      </header>
+      
+      <div class="alerts-creative-grid">
+        <div *ngFor="let a of systemAlerts" class="alert-creative-card" [attr.data-level]="a.niveau" [class.unread]="!a.lu">
+          <div class="alert-bg-icon">
+            <nb-icon [icon]="a.icon"></nb-icon>
+          </div>
+          <div class="alert-top-row">
+            <span class="alert-badge">{{ a.niveau }}</span>
+            <span class="alert-time">{{ a.temps }}</span>
+          </div>
+          <div class="alert-content">
+            <h3>{{ a.titre }}</h3>
+            <p>{{ a.message }}</p>
+          </div>
+          <div class="alert-actions">
+            <button nbButton size="tiny" outline *ngIf="!a.lu">Marquer lu</button>
+            <button nbButton size="tiny" ghost><nb-icon icon="more-horizontal-outline"></nb-icon></button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- ========== MES ÉVÉNEMENTS ========== -->
+    <ng-container *ngIf="activeSection === 'events'">
+      <header class="section-head">
+        <h2>Mes Événements</h2>
+        <span class="section-count">{{ eventsRowData.length }} événements</span>
+      </header>
+      <nb-card>
+        <nb-card-body>
+          <ag-grid-angular class="ag-theme-alpine ag-custom" [rowData]="eventsRowData" [columnDefs]="eventsColDefs" [gridOptions]="defaultGridOptions" [defaultColDef]="{ sortable: true, filter: true, resizable: true }"></ag-grid-angular>
+        </nb-card-body>
+      </nb-card>
+    </ng-container>
+
+    <!-- ========== VENTES & BILLETS ========== -->
+    <ng-container *ngIf="activeSection === 'sales'">
+      <header class="section-head">
+        <h2>Ventes &amp; Billets</h2>
+        <span class="section-count">{{ salesRowData.length }} transactions récentes</span>
+      </header>
+      <nb-card>
+        <nb-card-body>
+          <ag-grid-angular class="ag-theme-alpine ag-custom" [rowData]="salesRowData" [columnDefs]="salesColDefs" [gridOptions]="defaultGridOptions" [defaultColDef]="{ sortable: true, filter: true, resizable: true }"></ag-grid-angular>
+        </nb-card-body>
+      </nb-card>
+    </ng-container>
+
+    <!-- ========== SCANNERS ========== -->
+    <ng-container *ngIf="activeSection === 'scanners'">
+      <header class="section-head">
+        <h2>Agents Scanners</h2>
+        <button nbButton status="warning" size="small" style="margin-left: auto;">
+          <nb-icon icon="plus-outline"></nb-icon> Ajouter un scanner
+        </button>
+      </header>
+      <nb-card>
+        <nb-card-body>
+          <ag-grid-angular class="ag-theme-alpine ag-custom" [rowData]="scannersRowData" [columnDefs]="scannersColDefs" [gridOptions]="defaultGridOptions" [defaultColDef]="{ sortable: true, filter: true, resizable: true }"></ag-grid-angular>
+        </nb-card-body>
+      </nb-card>
+    </ng-container>
+
+    <!-- ========== PARAMÈTRES ========== -->
+    <ng-container *ngIf="activeSection === 'settings'">
+      <header class="section-head"><h2>Paramètres Organisateur</h2></header>
+      <section class="two-col">
+        <nb-card>
+          <nb-card-header><div class="ch-title">Profil Organisation</div></nb-card-header>
+          <nb-card-body>
+            <div class="form-field"><label>Nom de l'organisation</label><input nbInput fullWidth [(ngModel)]="settings.nomOrganisation"></div>
+            <div class="form-field"><label>Email de contact</label><input nbInput fullWidth [(ngModel)]="settings.emailContact"></div>
+            <div class="form-field"><label>Téléphone</label><input nbInput fullWidth [(ngModel)]="settings.telephone"></div>
+            <button nbButton status="warning" size="small">Enregistrer</button>
+          </nb-card-body>
+        </nb-card>
+        <nb-card>
+          <nb-card-header><div class="ch-title">Notifications</div></nb-card-header>
+          <nb-card-body>
+            <div class="toggle-item"><span>Email pour chaque vente</span><nb-toggle [(checked)]="settings.notificationsEmail" status="warning"></nb-toggle></div>
+            <div class="toggle-item"><span>SMS de rapport quotidien</span><nb-toggle [(checked)]="settings.notificationsSMS" status="warning"></nb-toggle></div>
+          </nb-card-body>
+        </nb-card>
+      </section>
+    </ng-container>
+
+  </nb-layout-column>
+</nb-layout>
